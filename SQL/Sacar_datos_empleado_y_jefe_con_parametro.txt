@@ -1,12 +1,20 @@
-DECLARE
-	v_empleados  emp%ROWTYPE;
-	v_jefes emp%ROWTYPE;
+CREATE OR REPLACE PROCEDURE DATOS_DE_EMPLEADO_Y_JEFE 
+(
+
+    p_numempleados emp.empno%TYPE
+
+) IS 
+
+v_empno emp.empno%type:=p_numempleados;
+v_empleados emp%ROWTYPE;
+v_jefes emp%ROWTYPE;
 
 BEGIN
-    SELECT *
+
+  SELECT *
     INTO v_empleados
     FROM EMP
-    WHERE EMPNO = 7521;
+    WHERE EMPNO = v_empno;
         
     DBMS_OUTPUT.PUT_LINE ('Empleado: ' ||
                           'Código:'||v_empleados.empno || ' ' ||
@@ -18,7 +26,7 @@ BEGIN
                           'Comisión:'||v_empleados.comm|| ' ' || 
                           'Departamento:'||v_empleados.deptno);
 
-    IF v_empleados is not null
+    IF v_empno is not null
 
         THEN 
             SELECT *
@@ -45,4 +53,5 @@ BEGIN
 EXCEPTION
     WHEN others THEN
     DBMS_OUTPUT.PUT_LINE ('Cliente no encontrado');
-END;
+
+END DATOS_DE_EMPLEADO_Y_JEFE;
