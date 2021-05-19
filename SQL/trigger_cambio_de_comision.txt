@@ -1,0 +1,13 @@
+CREATE OR REPLACE TRIGGER AUDITAR 
+BEFORE UPDATE ON EMP 
+FOR EACH ROW
+BEGIN
+
+    INSERT INTO AUDITAREMPLEADO (COMENTARIO) 
+    VALUES ('El empleado con nombre: ' || :OLD.ENAME || ' ' ||
+            'y número de empleado: ' || :OLD.EMPNO || ' ' ||
+            'ha pasado de tener una comisión: ' || :OLD.COMM || ' ' ||
+            ' a ' || :NEW.COMM ||
+            ' a día de ' || (SYSDATE));
+
+END;
