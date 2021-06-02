@@ -1,0 +1,24 @@
+/*create or replace NONEDITIONABLE TRIGGER AUDITAR_CON_JEFE
+BEFORE UPDATE ON EMP 
+FOR EACH ROW
+
+DECLARE
+
+V_JEFE EMP.ENAME%TYPE 
+
+SELECT ENAME 
+INTO V_JEFE
+FROM EMP
+WHERE :OLD.MGR = :OLD.EMPNO;
+
+BEGIN
+
+    INSERT INTO AUDITAREMPLEADOJEFE (COMENTARIO) 
+    
+    VALUES ('El empleado con nombre: ' || :OLD.ENAME || ' ' ||
+            'y número de empleado: ' || :OLD.EMPNO || ' ' ||
+            'ha pasado de tener una comisión de: ' || :OLD.COMM || ' ' ||
+            ' a ' || :NEW.COMM ||
+            ' a día de ' || TO_CHAR(SYSDATE,'YYYY-MM-DD') || 'cuyo jefe es: ' || V_JEFE );
+
+END;*/

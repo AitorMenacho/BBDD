@@ -1,0 +1,14 @@
+DECLARE
+    
+    p_numempleados emp.empno%TYPE:=&numemp;
+    p_numdept emp.deptno%TYPE:=&nomdept;
+    v_empno emp.empno%type;
+    v_deptno emp.deptno%type;
+
+BEGIN
+
+    asigna_departamento_a_empleado(p_numempleados,p_numdept);
+
+END;
+
+exec devolvercoddept ('RESEARCH');

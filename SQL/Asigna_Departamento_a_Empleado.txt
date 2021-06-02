@@ -1,0 +1,24 @@
+create or replace PROCEDURE ASIGNA_DEPARTAMENTO_A_EMPLEADO 
+(
+   p_numempleados emp.empno%TYPE,
+   p_numdept emp.deptno%TYPE
+   
+) IS 
+
+    v_empno emp.empno%type:=p_numempleados;
+    v_deptno emp.deptno%type:=p_numdept;
+    v_empleados emp%ROWTYPE;
+    
+BEGIN
+    
+    SELECT *
+    INTO v_empleados
+    FROM EMP
+    WHERE EMPNO = v_empno;
+    
+    dbms_output.put_line ('Cliente modificado');
+    
+EXCEPTION
+    WHEN others THEN
+    DBMS_OUTPUT.PUT_LINE ('Cliente no encontrado');
+END ASIGNA_DEPARTAMENTO_A_EMPLEADO;
